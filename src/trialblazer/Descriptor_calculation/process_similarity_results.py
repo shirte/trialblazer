@@ -70,8 +70,14 @@ def organize_similarity_results(
     if training_data:
         whole_df[target_id_list] = all_lists
         return whole_df, target_id_list
-    whole_df[list(target_cols_found)] = all_lists
-    return whole_df, list(target_cols_found)
+
+    # ensure that the order of the columns is the same as the order of the
+    # target_id_list
+    ordered_target_cols = [
+        target for target in target_id_list if target in target_cols_found
+    ]
+    whole_df[ordered_target_cols] = all_lists
+    return whole_df, ordered_target_cols
 
 
 def read_results_from_file(output_temp_save):
