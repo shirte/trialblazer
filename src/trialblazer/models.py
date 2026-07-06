@@ -372,7 +372,9 @@ def pairwise_tanimoto_similarity_closest_distance(smi_list, query_set_smi_list, 
     default_value = -1
     results = []
     for my_smi in tqdm(query_set_smi_list, desc="Calculating similarities"):
-        sim_results = fpe.similarity(my_smi, threshold=0, metric='tanimoto', n_workers=20)
+        sim_results = fpe.similarity(
+            my_smi, threshold=0, metric="tanimoto", n_workers=1
+        )
         sim_dict = dict.fromkeys(smi_list, default_value)
         for idx, value in sim_results:
             p = smi_list[idx]

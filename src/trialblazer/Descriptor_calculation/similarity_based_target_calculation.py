@@ -59,7 +59,7 @@ def tanimoto_similarity_calculation(
                 results = fpe.similarity(
                     my_smi,
                     similarity_threshold,
-                    n_workers=20,
+                    n_workers=1,
                 )
                 results_append.append(results)
                 my_smi_append.append(my_smi)
@@ -68,7 +68,7 @@ def tanimoto_similarity_calculation(
             results = fpe.similarity(
                 my_smi,
                 similarity_threshold,
-                n_workers=20,
+                n_workers=1,
             )
             results_append.append(results)
             my_smi_append.append(my_smi)
