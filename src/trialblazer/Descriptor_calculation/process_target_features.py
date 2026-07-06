@@ -51,6 +51,7 @@ def process_target_features(
     results_whole = tanimoto_similarity_calculation(
         fpe,
         data_for_similarity,
+        similarity_threshold=similarity_threshold,
     )  # kernal crush
 
     separate_similarity_results(
