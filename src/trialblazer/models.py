@@ -476,10 +476,11 @@ def trialblazer_func(
         predict_result_sim_remove_multi = predict_result_sim[
             ~predict_result_sim["id"].str.contains(r"\d+x\d+")
         ]  # Remove multi-component drugs if the toxicity of the compounds is uncertain
-        predict_result_sim_remove_multi = predict_result_sim_remove_multi.sort_values(
-            by="PrOCTOR_score",
-            ascending=False,
-            ignore_index=True,
+        predict_result_sim_remove_multi = (
+            predict_result_sim_remove_multi.sort_values(
+                by="PrOCTOR_score",
+                ascending=False,
+            )
         )
         predict_result_sim = predict_result_sim_remove_multi
 
