@@ -43,6 +43,7 @@ def tanimoto_similarity_calculation(
     query_dataset,
     split_data=False,
     num_splits=None,
+    similarity_threshold=0,
 ):
     results_append = []
     my_smi_append = []
@@ -55,12 +56,20 @@ def tanimoto_similarity_calculation(
         gen = np.array_split(query_dataset, num_splits)
         for _index, batch in generator_yield_gen(gen):
             for my_smi in generator_yield_smiles(batch):
-                results = fpe.similarity(my_smi, 0, n_workers=20)
+                results = fpe.similarity(
+                    my_smi,
+                    similarity_threshold,
+                    n_workers=1,
+                )
                 results_append.append(results)
                 my_smi_append.append(my_smi)
     else:
         for my_smi in generator_yield_smiles(query_dataset):
-            results = fpe.similarity(my_smi, 0, n_workers=20)
+            results = fpe.similarity(
+                my_smi,
+                similarity_threshold,
+                n_workers=1,
+            )
             results_append.append(results)
             my_smi_append.append(my_smi)
     return pd.DataFrame(

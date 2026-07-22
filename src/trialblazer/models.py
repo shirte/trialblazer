@@ -372,7 +372,9 @@ def pairwise_tanimoto_similarity_closest_distance(smi_list, query_set_smi_list, 
     default_value = -1
     results = []
     for my_smi in tqdm(query_set_smi_list, desc="Calculating similarities"):
-        sim_results = fpe.similarity(my_smi, threshold=0, metric='tanimoto', n_workers=20)
+        sim_results = fpe.similarity(
+            my_smi, threshold=0, metric="tanimoto", n_workers=1
+        )
         sim_dict = dict.fromkeys(smi_list, default_value)
         for idx, value in sim_results:
             p = smi_list[idx]
@@ -476,10 +478,11 @@ def trialblazer_func(
         predict_result_sim_remove_multi = predict_result_sim[
             ~predict_result_sim["id"].str.contains(r"\d+x\d+")
         ]  # Remove multi-component drugs if the toxicity of the compounds is uncertain
-        predict_result_sim_remove_multi = predict_result_sim_remove_multi.sort_values(
-            by="PrOCTOR_score",
-            ascending=False,
-            ignore_index=True,
+        predict_result_sim_remove_multi = (
+            predict_result_sim_remove_multi.sort_values(
+                by="PrOCTOR_score",
+                ascending=False,
+            )
         )
         predict_result_sim = predict_result_sim_remove_multi
 
