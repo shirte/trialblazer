@@ -16,5 +16,5 @@ seaborn==0.13.2
 spacy==3.8.7
 tqdm==4.67.1
 rdkit==2024.9.6
-nerdd-module==0.3.51
-nerdd-link==0.5.14
+nerdd-module==0.3.59
+nerdd-link==0.6.7
